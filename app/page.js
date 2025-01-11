@@ -42,7 +42,7 @@ function Home() {
               Practice with senior developers from top tech companies
             </p>
             <a className="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:bg-blue-700 hover:scale-105 hover:shadow-lg group">
-              Start Practicing Now
+              Start Practicing Nowiiiiiii
               <ArrowRight className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
