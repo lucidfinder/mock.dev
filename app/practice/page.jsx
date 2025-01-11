@@ -1,8 +1,11 @@
 'use client';
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import axios from "axios";
-import MonacoEditor from "react-monaco-editor";
 import { chatSession } from "@/utils/GeminiAIModel";
+
+// Dynamically import MonacoEditor with no SSR
+const MonacoEditor = dynamic(() => import("react-monaco-editor"), { ssr: false })
 
 function App() {
     const [questions, setQuestions] = useState([]);
