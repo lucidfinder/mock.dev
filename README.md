@@ -1,1 +1,1 @@
-# skillifyai
+# mock.dev
