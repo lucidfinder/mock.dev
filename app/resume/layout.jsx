@@ -5,7 +5,7 @@ import Header from '../_components/Header';
 
 
 
-function DashboardLayout({ children }) {
+function page({ children }) {
   return (
     <div className='flex'>
       <Sidebar />
@@ -17,4 +17,4 @@ function DashboardLayout({ children }) {
   );
 }
 
-export default DashboardLayout;
+export default page;

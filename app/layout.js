@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from '@/components/ui/sonner';
+import { enUS } from '@clerk/localizations'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,7 +13,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+ 
+    appearance={{
+      
+      elements: {
+        formButtonPrimary: 'bg-blue-600 text-white',
+        cardBox: 'bg-white shadow-lg',
+        footer: 'bg-white border-t border-900 text-white',
+        footerActionLink: 'text-blue-600',
+      },
+      layout: {
+        socialButtonsPlacement: 'bottom',
+        socialButtonsVariant: 'iconButton',
+        termsPageUrl: 'https://clerk.com/terms'
+      }
+    }}
+  >
+  
+    
+    
       <html lang='en'>
         <body className={inter.className}>
           <Toaster />

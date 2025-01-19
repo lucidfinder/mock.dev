@@ -1,23 +1,31 @@
-
 import React from 'react';
-import AddNewInterview from './_components/AddNewInterview';
-import InterviewList from './_components/InterviewList';
 
+import AddNewInterview from '../_components/AddNewInterview';
+import InterviewList from '../_components/InterviewList';
 
 function Dashboard() {
   return (
-    <div className='p-10'>
-      <h2 className='font-bold text-2xl'>Dashboard</h2>
-      <h2 className='text-gray-500'>Create and Start your AI Interview</h2>
+    <>
+   
+      <div className="p-10 space-y-14">
+        <div className="border rounded-lg p-5">
+          <h2 className="font-bold text-2xl">Welcome to mock.dev</h2>
+          <h2 className="text-gray-500">
+            Practice your interview skills with our AI-powered mock interviews.
+            Get instant feedback and improve your chances of landing your dream job.
+          </h2>
+        </div>
+        <div className="border rounded-lg p-5 flex items-center justify-between">
+          <h3 className="font-bold text-xl">Start New Interview</h3>
+          <AddNewInterview />
+        </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-3 my-5'>
-        <AddNewInterview />
+        {/* Previous Interview List */}
+        <div className="border rounded-lg p-5">
+          <InterviewList />
+        </div>
       </div>
-
-      {/* Previous Interview List */}
-      <InterviewList />
- 
-    </div>
+    </>
   );
 }
 

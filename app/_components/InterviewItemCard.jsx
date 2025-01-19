@@ -1,4 +1,4 @@
-import { Button } from '../../../components/ui/button';
+import { Button } from '../../components/ui/button';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import {
@@ -7,10 +7,10 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '../../../components/ui/dialog';
+} from '../../components/ui/dialog';
 import { X } from 'lucide-react';
-import { db } from '../../../utils/db';
-import { MockInterview } from '../../../utils/schema';
+import { db } from '../../utils/db';
+import { MockInterview } from '../../utils/schema';
 import { eq } from 'drizzle-orm';
 
 function InterviewItemCard({ interview, setInterviewList }) {
@@ -31,7 +31,7 @@ function InterviewItemCard({ interview, setInterviewList }) {
   };
 
   return (
-    <div className='border shadow-sm rounded-lg p-3 relative'>
+    <div className='w-full flex flex-col border shadow-sm rounded-lg p-3 relative'>
       <button
         className='absolute right-2 top-2 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'
         onClick={() => setOpenDialog(true)}

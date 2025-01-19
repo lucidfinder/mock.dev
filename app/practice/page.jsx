@@ -1,8 +1,11 @@
 'use client';
 import React, { useState, useEffect } from "react";
+import "./styles.css"
 import dynamic from "next/dynamic";
 import axios from "axios";
 import { chatSession } from "@/utils/GeminiAIModel";
+import Link from 'next/link';
+import { UserButton } from '@clerk/nextjs';
 
 // Dynamically import MonacoEditor with no SSR
 const MonacoEditor = dynamic(() => import("react-monaco-editor"), { ssr: false })
@@ -20,6 +23,7 @@ function App() {
     const [code, setCode] = useState("");
     const [language, setLanguage] = useState("javascript");
     const [testCases, setTestCases] = useState([]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const fetchQuestions = async () => {
         setLoading(true);
@@ -165,40 +169,70 @@ function App() {
     };
     
     return (
-        <div className="bg-gray-900 text-gray-200 min-h-screen font-mono">
-            <header className="bg-gray-800 p-4 shadow-md">
-                <h1 className="text-2xl font-bold text-center text-white">Coding Platform</h1>
+        <div className="bg-[#0d1117] text-[#c9d1d9] min-h-screen font-mono">
+            <header className="bg-[#161b22] p-4 shadow-md flex items-center justify-between">
+                <div className="relative">
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className="focus:outline-none mt-6"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 mr-2 text-[#c9d1d9]">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+
+                    {/* Popup Menu */}
+                    {isMenuOpen && (
+                        <div className="absolute left-0 mt-2 w-48 bg-[#161b22] border rounded shadow-md z-50">
+                                <Link href="/" className="block px-4 py-2 hover:bg-[#30363d] text-[#c9d1d9] font-bold">
+                                    Home
+                                </Link>
+                                <Link href="/resume" className="block px-4 py-2 hover:bg-[#30363d] text-[#c9d1d9] font-bold">
+                                    Resume
+                                </Link>
+                                <Link href="/interview" className="block px-4 py-2 hover:bg-[#30363d] text-[#c9d1d9] font-bold">
+                                    Interview
+                                </Link>
+                        </div>
+                    )}
+                </div>
+                <div className="flex items-center mx-auto">
+                    <a href="/" className=" text-2xl font-bold hover-lift text-[#FFFFFF]">Mock.<span className="jsx-dca3ce4065a97568 text-blue-600">Dev</span></a>
+                </div>
+                <div className="flex items-center">
+                    <UserButton />
+                </div>
             </header>
 
-            <div className="p-4 flex items-center justify-center space-x-4 bg-gray-800">
-                <div>
+            <div className="p-4 flex items-center space-x-4 bg-[#161b22]">
+                <div className="flex items-center">
                     <label className="mr-2">Difficulty:</label>
                     <select
                         value={difficulty}
                         onChange={(e) => setDifficulty(e.target.value)}
-                        className="bg-gray-700 p-2 rounded"
+                        className="bg-[#161b22] p-2 rounded text-[#c9d1d9]"
                     >
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
                     </select>
                 </div>
-                <div>
+                <div className="flex items-center">
                     <label className="mr-2">Number of Questions:</label>
                     <input
                         type="number"
                         value={numQuestions}
                         onChange={(e) => setNumQuestions(Number(e.target.value))}
                         min="1"
-                        className="bg-gray-700 p-2 rounded w-16"
+                        className="bg-[#161b22] p-2 rounded w-16 text-[#c9d1d9]"
                     />
                 </div>
-                <div>
+                 <div className="flex items-center">
                     <label className="mr-2">Language:</label>
                     <select
                         value={language}
                         onChange={(e) => setLanguage(e.target.value)}
-                        className="bg-gray-700 p-2 rounded"
+                        className="bg-[#161b22] p-2 rounded text-[#c9d1d9]"
                     >
                         <option value="javascript">JavaScript</option>
                         <option value="python">Python</option>
@@ -208,14 +242,14 @@ function App() {
                 </div>
                 <button
                     onClick={fetchQuestions}
-                    className="py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white rounded"
+                    className="py-2 px-4 bg-green-500 hover:bg-green-400 text-white rounded"
                 >
                     Generate Questions
                 </button>
             </div>
 
             <main className="p-4 flex gap-4">
-                <section className="bg-gray-800 p-4 rounded shadow-md w-full sm:w-1/2 overflow-auto">
+                <section className="bg-[#161b22] p-4 rounded shadow-md w-full sm:w-1/2 overflow-auto">
                     {loading && <p className="text-center text-blue-400">Generating questions...</p>}
                     {error && <p className="text-center text-red-400">{error}</p>}
                     {questionVisible && (
@@ -225,18 +259,18 @@ function App() {
 
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-green-400">Constraints:</h3>
-                                <pre className="bg-gray-700 p-3 rounded mt-2 whitespace-pre-wrap break-words">{currentQuestion.constraints}</pre>
+                                <pre className="bg-[#161b22] p-3 rounded mt-2 whitespace-pre-wrap break-words">{currentQuestion.constraints}</pre>
                             </div>
 
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold text-yellow-400">Example:</h3>
-                                <pre className="bg-gray-700 p-3 rounded mt-2 whitespace-pre-wrap break-words">{currentQuestion.example}</pre>
+                                <pre className="bg-[#161b22] p-3 rounded mt-2 whitespace-pre-wrap break-words">{currentQuestion.example}</pre>
                             </div>
                              {currentQuestion.testCases && currentQuestion.testCases.length > 0 && (
                                  <div className="mt-4">
                                      <h3 className="text-lg font-semibold text-purple-400">Test Cases:</h3>
                                      {currentQuestion.testCases.map((testCase, index) => (
-                                         <pre key={index} className="bg-gray-700 p-3 rounded mt-2 whitespace-pre-wrap break-words">
+                                         <pre key={index} className="bg-[#161b22] p-3 rounded mt-2 whitespace-pre-wrap break-words">
                                              Input: {testCase.input}, Output: {testCase.output}
                                           </pre>
                                      ))}
@@ -246,7 +280,7 @@ function App() {
                     )}
                 </section>
 
-                <section className="flex-1 bg-gray-800 p-4 rounded shadow-md w-full sm:w-1/2">
+                <section className="flex-1 bg-[#161b22] p-4 rounded shadow-md w-full sm:w-1/2">
                     <h2 className="text-lg font-bold text-blue-400">Code Editor</h2>
                     <MonacoEditor
                         width="100%"
@@ -259,6 +293,7 @@ function App() {
                             automaticLayout: true,
                             minimap: { enabled: false },
                             lineNumbers: "on",
+                            backgroundColor: '#0d1117',
                         }}
                         className="mt-4"
                     />
@@ -271,12 +306,12 @@ function App() {
 
                     <div className="mt-4">
                         <h3 className="text-lg font-semibold text-orange-400">Output:</h3>
-                        <pre className="bg-gray-700 p-3 rounded mt-2">{output}</pre>
+                        <pre className="bg-[#161b22] p-3 rounded mt-2">{output}</pre>
                     </div>
 
                     <div className="mt-4">
                         <h3 className="text-lg font-semibold text-red-400">Evaluation Result:</h3>
-                        <pre className="bg-gray-700 p-3 rounded mt-2 whitespace-pre-wrap break-words">{evaluationResult}</pre>
+                        <pre className="bg-[#161b22]  p-3 rounded mt-2 whitespace-pre-wrap break-words">{evaluationResult}</pre>
                     </div>
                     <div className="mt-4 flex justify-between">
                         <button

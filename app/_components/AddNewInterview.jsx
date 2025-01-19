@@ -1,3 +1,4 @@
+// This component is for adding a new interview.
 'use client';
 import React, { useState } from 'react';
 import {
@@ -93,7 +94,7 @@ function AddNewInterview() {
         <h2 className='font-bold text-lg'>+ Add New</h2>
       </div>
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogContent className='max-w-2xl'>
+        <DialogContent className='max-w-md w-full'>
           <DialogHeader>
             <DialogTitle className='text-2xl'>
               Tell us more about your job Interviewing
